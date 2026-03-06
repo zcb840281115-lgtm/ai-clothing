@@ -631,23 +631,22 @@ export default App;
 </main>
 
 {/* Footer */ }
-<footer className="border-t border-white/10 py-8 mt-12">
+<><footer className="border-t border-white/10 py-8 mt-12">
   <div className="max-w-7xl mx-auto px-6 text-center">
     <p className="text-xs opacity-40 uppercase tracking-[0.2em]">
       Continuous AI Iteration &bull; Batch ZIP Export
     </p>
   </div>
-</footer>
-
-{/* Hidden File Input */ }
-<input
-  type="file"
-  ref={fileInputRef}
-  onChange={handleImageUpload}
-  accept="image/*"
-  multiple
-  className="hidden"
-/>
+</footer><div className="text-center">
+    <p className="text-lg font-medium">Upload Multiple Images</p>
+    <p className="text-sm opacity-40 mt-1">Drag and drop or click to select files</p>
+  </div><input
+    type="file"
+    ref={fileInputRef}
+    onChange={handleImageUpload}
+    accept="image/*"
+    multiple
+    className="hidden" /></>
         </div > 
       ) : (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
