@@ -11,8 +11,9 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
 // 1. 初始化环境变量 (确保 Vercel 后台已配置 VITE_GEMINI_API_KEY)
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-const genAI = new GoogleGenAI(apiKey || "");
+const ai = new GoogleGenAI({ 
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY 
+});
 
 interface RGB {
   r: number;
