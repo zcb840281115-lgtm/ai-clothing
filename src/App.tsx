@@ -478,11 +478,13 @@ export default App;
           </div>
           <input
             type="file" ref={fileInputRef} onChange={handleImageUpload}
-            accept="image/*" multiple className="hidden"
-          />
-        </div>
-       ) : (      
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          accept="image/*"
+        multiple
+        className="hidden"
+      />
+    </div> 
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AnimatePresence>
             {tasks.map((task) => (
               <motion.div
