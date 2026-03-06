@@ -276,6 +276,7 @@ export default function App() {
       </main>
     </div>
   );
+}
 
 export default App;
 
@@ -414,8 +415,8 @@ export default App;
             onClick={processAll}
             disabled={tasks.length === 0 || isProcessingAll}
             className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] ${tasks.length === 0 || isProcessingAll
-                ? 'bg-white/10 text-white/30 cursor-not-allowed'
-                : 'bg-emerald-500 text-black hover:bg-emerald-400 shadow-lg shadow-emerald-500/20'
+              ? 'bg-white/10 text-white/30 cursor-not-allowed'
+              : 'bg-emerald-500 text-black hover:bg-emerald-400 shadow-lg shadow-emerald-500/20'
               }`}
           >
             {isProcessingAll ? (
@@ -478,13 +479,11 @@ export default App;
           </div>
           <input
             type="file" ref={fileInputRef} onChange={handleImageUpload}
-          accept="image/*"
-        multiple
-        className="hidden"
-      />
-</div>
-  ) : (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            accept="image/*" multiple className="hidden"
+          />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AnimatePresence>
             {tasks.map((task) => (
               <motion.div
@@ -498,9 +497,9 @@ export default App;
                 {/* Task Header */}
                 <div className="absolute top-3 left-3 right-3 z-10 flex justify-between items-center">
                   <div className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest backdrop-blur-md border ${task.status === 'done' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400' :
-                      task.status === 'processing' ? 'bg-blue-500/20 border-blue-500/50 text-blue-400' :
-                        task.status === 'error' ? 'bg-red-500/20 border-red-500/50 text-red-400' :
-                          'bg-black/40 border-white/10 text-white/60'
+                    task.status === 'processing' ? 'bg-blue-500/20 border-blue-500/50 text-blue-400' :
+                      task.status === 'error' ? 'bg-red-500/20 border-red-500/50 text-red-400' :
+                        'bg-black/40 border-white/10 text-white/60'
                     }`}>
                     {task.status}
                   </div>
@@ -642,9 +641,13 @@ export default App;
 
 {/* Hidden File Input */ }
 <input
-  type="file" ref={fileInputRef} onChange={handleImageUpload}
-  accept="image/*" multiple className="hidden"
+  type="file"
+  ref={fileInputRef}
+  onChange={handleImageUpload}
+  accept="image/*"
+  multiple
+  className="hidden"
 />
-    </div > //
-  );
-}
+        </div > 
+      ) : (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
