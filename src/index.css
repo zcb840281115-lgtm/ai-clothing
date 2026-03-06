@@ -1,1 +1,22 @@
 @import "tailwindcss";
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  /* 确保移动端和桌面端都不会有奇怪的滚动 */
+  overscroll-behavior: none; 
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}

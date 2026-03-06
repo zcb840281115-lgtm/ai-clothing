@@ -238,24 +238,47 @@ export default function App() {
   const doneCount = tasks.filter(t => t.status === 'done').length;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-emerald-500/30">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-              <Palette className="w-5 h-5 text-black" />
-            </div>
-            <h1 className="text-xl font-semibold tracking-tight">AI Clothing Colorizer <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-widest">Continuous Mode</span></h1>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: hexColor }} />
-              <span className="text-xs font-mono uppercase tracking-wider opacity-70">{hexColor}</span>
-            </div>
-          </div>
+   // 1. 最外层容器：强制 100% 视口高度，黑色背景，禁止溢出滚动
+    <div className="h-screen w-screen flex flex-col bg-black text-white overflow-hidden">
+      
+      {/* 2. 顶部导航栏 (Header) */}
+      <header className="h-16 flex items-center justify-between px-6 border-b border-gray-800 shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">🎨</span>
+          <h1 className="text-xl font-bold tracking-tight">AI Clothing Colorizer Pro</h1>
         </div>
+        {/* 这里可以放你之后的“购买额度”按钮 */}
+        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-sm font-medium transition-colors">
+          升级方案
+        </button>
       </header>
+
+      {/* 3. 主体区域 (Main)：使用 flex-1 占据剩余所有空间 */}
+      <main className="flex-1 flex overflow-hidden">
+        
+        {/* 左侧控制面板：固定宽度，如果内容多可独立滚动 */}
+        <aside className="w-80 border-r border-gray-800 p-6 overflow-y-auto flex flex-col gap-6 bg-[#050505]">
+          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">控制面板</h2>
+          {/* 这里放你的上传按钮、颜色选择器等组件 */}
+          <div className="space-y-4">
+             {/* 你的上传代码... */}
+          </div>
+        </aside>
+
+        {/* 右侧预览区：占据剩余全部空间，居中显示图片 */}
+        <section className="flex-1 bg-[#0a0a0a] relative flex items-center justify-center p-8">
+          <div className="max-w-4xl w-full h-full border-2 border-dashed border-gray-800 rounded-2xl flex items-center justify-center relative overflow-hidden">
+            {/* 这里放你的图片预览逻辑... */}
+            <p className="text-gray-500">等待上传图片...</p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  );
+}
+
+export default App;
 
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
