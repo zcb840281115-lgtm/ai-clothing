@@ -641,14 +641,22 @@ export default App;
             <p className="text-lg font-medium">Upload Multiple Images</p>
             <p className="text-sm opacity-40 mt-1">Drag and drop or click to select files</p>
           </div>
+         // 从 input 标签开始替换到文件最末尾
           <input
-            type="file" 
-            ref={fileInputRef} 
+            type="file"
+            ref={fileInputRef}
             onChange={handleImageUpload}
             accept="image/*"
             multiple
             className="hidden"
           />
-        </div> 
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
