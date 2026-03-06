@@ -11,9 +11,7 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
 // Initialize Gemini AI
-const ai = new GoogleGenAI({ 
-  apiKey: import.meta.env.VITE_GEMINI_API_KEY 
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
 
 interface RGB {
   r: number;
@@ -50,6 +48,29 @@ export default function App() {
   const [isProcessingAll, setIsProcessingAll] = useState(false);
   const [isDownloadingAll, setIsDownloadingAll] = useState(false);
   const [customColors, setCustomColors] = useState<string[]>([]);
+
+  // Fluid UI Scaling logic - True Proportional Scaling
+  useEffect(() => {
+    const updateScale = () => {
+      const width = window.innerWidth;
+      const designWidth = 1440; // Base design width
+      
+      // Calculate scale factor based on current width vs design width
+      // We allow it to scale down to mobile and up to ultra-wide
+      let scaleFactor = width / designWidth;
+      
+      // Set a floor and ceiling for the scale to keep it usable
+      // Floor: 0.5 (for very small screens), Ceiling: 1.5 (for huge screens)
+      const clampedScale = Math.min(Math.max(scaleFactor, 0.4), 1.8);
+      
+      const baseFontSize = 16;
+      document.documentElement.style.fontSize = `${baseFontSize * clampedScale}px`;
+    };
+
+    window.addEventListener('resize', updateScale);
+    updateScale();
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   // Load custom colors from localStorage
   useEffect(() => {
@@ -241,28 +262,28 @@ export default function App() {
     <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-emerald-500/30 flex flex-col">
       {/* Header */}
       <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50 w-full">
-        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-              <Palette className="w-5 h-5 text-black" />
+        <div className="w-full max-w-[1920px] mx-auto px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+              <Palette className="w-6 h-6 text-black" />
             </div>
-            <h1 className="text-xl font-semibold tracking-tight">AI Clothing Colorizer <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-widest">Continuous Mode</span></h1>
+            <h1 className="text-2xl font-bold tracking-tight">AI Clothing Colorizer <span className="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full ml-2 uppercase tracking-widest border border-emerald-500/30">Continuous Mode</span></h1>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: hexColor }} />
-              <span className="text-xs font-mono uppercase tracking-wider opacity-70">{hexColor}</span>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
+              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: hexColor }} />
+              <span className="text-sm font-mono uppercase tracking-wider opacity-70">{hexColor}</span>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="w-full max-w-[1600px] mx-auto px-4 md:px-8 py-6 md:py-12 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+      <main className="w-full max-w-[1920px] mx-auto px-8 py-12 flex-1">
+        <div className="grid grid-cols-12 gap-10">
           
           {/* Left Column: Controls */}
-          <div className="lg:col-span-4 xl:col-span-3 space-y-6">
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-6 space-y-6 lg:sticky lg:top-24">
+          <div className="col-span-4 xl:col-span-3 space-y-8">
+            <section className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 space-y-8 sticky top-32 shadow-2xl">
               <div className="flex items-center gap-2 mb-2">
                 <Sliders className="w-4 h-4 text-emerald-400" />
                 <h2 className="text-sm font-semibold uppercase tracking-widest opacity-50">Color Controls</h2>
@@ -442,20 +463,20 @@ export default function App() {
           </div>
 
           {/* Right Column: Task Grid */}
-          <div className="lg:col-span-8 xl:col-span-9 space-y-8">
+          <div className="col-span-8 xl:col-span-9 space-y-10">
             {tasks.length === 0 ? (
               <div 
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={onDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className="aspect-video rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center gap-6 cursor-pointer hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group"
+                className="aspect-video rounded-[3rem] border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center gap-8 cursor-pointer hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group"
               >
-                <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Upload className="w-10 h-10 opacity-30 group-hover:opacity-100 group-hover:text-emerald-400 transition-all" />
+                <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Upload className="w-12 h-12 opacity-30 group-hover:opacity-100 group-hover:text-emerald-400 transition-all" />
                 </div>
                 <div className="text-center">
-                  <p className="text-lg font-medium">Upload Multiple Images</p>
-                  <p className="text-sm opacity-40 mt-1">Drag and drop or click to select files</p>
+                  <p className="text-2xl font-medium">Upload Multiple Images</p>
+                  <p className="text-base opacity-40 mt-2">Drag and drop or click to select files</p>
                 </div>
                 <input 
                   type="file" ref={fileInputRef} onChange={handleImageUpload} 
@@ -463,7 +484,7 @@ export default function App() {
                 />
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-8">
                 <AnimatePresence>
                   {tasks.map((task) => (
                     <motion.div
