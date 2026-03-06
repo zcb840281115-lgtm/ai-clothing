@@ -1,0 +1,5 @@
+{
+  "name": "AI Clothing Colorizer",
+  "description": "An AI-powered tool to change the color of clothes in images using RGB parameters while preserving all details.",
+  "requestFramePermissions": []
+}
