@@ -1,22 +1,13 @@
-@import "tailwindcss";
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  /* 确保移动端和桌面端都不会有奇怪的滚动 */
-  overscroll-behavior: none; 
-}
-
-#root {
-  height: 100vh;
-  width: 100vw;
+/* 强制所有根容器占据 100% 屏幕，不留白边 */
+html, body, #root {
+  height: 100vh !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden; /* 防止出现奇怪的滚动条 */
+  background-color: #000;
 }
