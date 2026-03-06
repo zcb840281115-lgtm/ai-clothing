@@ -11,7 +11,9 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
 // Initialize Gemini AI
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
+const ai = new GoogleGenAI({ 
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY 
+});
 
 interface RGB {
   r: number;
