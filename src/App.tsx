@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { Upload, Sliders, RefreshCw, X, Plus } from 'lucide-react';
 
-const ai = new GoogleGenAI(import.meta.env.VITE_GEMINI_API_KEY);
+const genAI = new GoogleGenAI(import.meta.env.VITE_GEMINI_API_KEY || "dummy_key");
 
 export default function App() {
   const [tasks, setTasks] = useState<any[]>([]);
