@@ -637,16 +637,18 @@ export default App;
       Continuous AI Iteration &bull; Batch ZIP Export
     </p>
   </div>
-</footer><div className="text-center">
-    <p className="text-lg font-medium">Upload Multiple Images</p>
-    <p className="text-sm opacity-40 mt-1">Drag and drop or click to select files</p>
-  </div><input
-    type="file"
-    ref={fileInputRef}
-    onChange={handleImageUpload}
-    accept="image/*"
-    multiple
-    className="hidden" /></>
-        </div > 
+<div className="text-center">
+            <p className="text-lg font-medium">Upload Multiple Images</p>
+            <p className="text-sm opacity-40 mt-1">Drag and drop or click to select files</p>
+          </div>
+          <input
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleImageUpload}
+            accept="image/*"
+            multiple
+            className="hidden"
+          />
+        </div> 
       ) : (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
